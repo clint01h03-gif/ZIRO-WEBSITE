@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support | Ziro Devices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #ffffff; font-family: 'Inter', sans-serif; color: #1e293b;
+      line-height: 1.5; -webkit-font-smoothing: antialiased;
+    }
+    :root {
+      --light-blue: #e8f0fe; --blue-gray-50: #f8fafc; --blue-gray-100: #f1f5f9;
+      --blue-gray-200: #e2e8f0; --blue-gray-300: #cbd5e1; --blue-gray-400: #94a3b8;
+      --dark-blue: #0b1e33; --accent-blue: #2563eb; --accent-soft: #dbeafe; --white: #ffffff;
+      --shadow-sm: 0 8px 20px -6px rgba(0, 20, 40, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 20px 35px -12px rgba(0, 35, 70, 0.12), 0 8px 18px -6px rgba(0, 0, 0, 0.05);
+    }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+    .nav-bar { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo {
+      font-family: 'Manrope', sans-serif; font-size: 1.8rem; font-weight: 700;
+      letter-spacing: -0.02em; color: var(--dark-blue); text-decoration: none;
+    }
+    .logo span { color: var(--accent-blue); font-weight: 600; }
+    .nav-links { display: flex; gap: 2.5rem; font-weight: 500; font-size: 0.95rem; color: #1e2e47; }
+    .nav-links a { text-decoration: none; color: inherit; transition: color 0.2s ease; letter-spacing: -0.01em; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-blue); }
+    .header-actions { display: flex; gap: 0.75rem; align-items: center; }
+    .icon-btn {
+      background: transparent; border: none; padding: 8px; border-radius: 40px; cursor: pointer;
+      color: var(--dark-blue); transition: background 0.2s; display: flex; align-items: center; justify-content: center;
+    }
+    .icon-btn:hover { background: var(--blue-gray-100); }
+    .cart-badge {
+      background: var(--accent-blue); color: white; font-size: 0.7rem; font-weight: 600;
+      width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; margin-left: -8px; margin-top: -12px; position: relative; top: -4px;
+    }
+    .icon-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 1.8; fill: none; }
+
+    .page-hero {
+      padding: 80px 0 60px;
+      background: linear-gradient(160deg, #ffffff 0%, #f4f8ff 100%);
+      border-bottom: 1px solid var(--blue-gray-200);
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-family: 'Manrope', sans-serif; font-size: 3.4rem; font-weight: 700;
+      letter-spacing: -0.03em; color: var(--dark-blue); margin-bottom: 16px; line-height: 1.15;
+    }
+    .page-hero h1 .accent { color: var(--accent-blue); }
+    .page-hero p {
+      font-size: 1.2rem; color: #475569; max-width: 560px; margin: 0 auto; line-height: 1.6;
+    }
+
+    .contact-section { padding: 80px 0; background: var(--white); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-bottom: 64px;
+    }
+    .contact-card {
+      background: var(--white);
+      border-radius: 28px;
+      padding: 48px 40px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .contact-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(37, 99, 235, 0.25);
+    }
+    .contact-icon {
+      width: 72px; height: 72px;
+      background: var(--light-blue);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent-blue);
+      margin-bottom: 28px;
+      border: 1px solid rgba(37, 99, 235, 0.12);
+    }
+    .contact-icon svg { width: 32px; height: 32px; stroke: currentColor; stroke-width: 1.8; fill: none; }
+    .contact-card h3 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #64748b;
+      margin-bottom: 16px;
+    }
+    .contact-value {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .contact-value a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-value a:hover { color: var(--accent-blue); }
+    .contact-sub {
+      font-size: 0.95rem;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    .address-block {
+      background: var(--dark-blue);
+      border-radius: 36px;
+      padding: 64px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 45px -20px rgba(11, 30, 51, 0.3);
+    }
+    .address-block::after {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.25), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .address-block h2 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .address-main {
+      font-family: 'Manrope', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    .address-detail {
+      font-size: 1.15rem;
+      color: #b9c7da;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hours-section {
+      padding: 64px 0 80px;
+      background: var(--blue-gray-50);
+      border-top: 1px solid var(--blue-gray-200);
+    }
+    .hours-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+    }
+    .hours-card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 24px;
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      box-shadow: var(--shadow-sm);
+    }
+    .hours-card h4 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      margin-bottom: 10px;
+    }
+    .hours-card p {
+      font-size: 0.95rem;
+      color: #64748b;
+      line-height: 1.55;
+    }
+
+    .site-footer {
+      padding: 64px 0 32px; background: var(--blue-gray-50); border-top: 1px solid var(--blue-gray-200);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 48px; margin-bottom: 48px;
+    }
+    .footer-brand .logo { font-size: 1.6rem; margin-bottom: 16px; display: inline-block; }
+    .footer-brand p { color: #475569; font-size: 0.9rem; max-width: 240px; line-height: 1.6; }
+    .footer-col h5 {
+      font-family: 'Manrope', sans-serif; font-size: 0.95rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.04em; color: var(--dark-blue); margin-bottom: 20px;
+    }
+    .footer-col a {
+      display: block; text-decoration: none; color: #475569; font-size: 0.9rem; margin-bottom: 12px; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--accent-blue); }
+    .footer-bottom {
+      border-top: 1px solid var(--blue-gray-200); padding-top: 32px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+      color: #64748b; font-size: 0.85rem;
+    }
+
+    @media (max-width: 1024px) {
+      .page-hero h1 { font-size: 2.8rem; }
+      .nav-links { gap: 1.6rem; }
+      .contact-value { font-size: 1.6rem; }
+      .address-main { font-size: 2rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .page-hero { padding: 56px 0 44px; }
+      .page-hero h1 { font-size: 2.3rem; }
+      .page-hero p { font-size: 1.05rem; }
+      .contact-card { padding: 36px 28px; }
+      .contact-value { font-size: 1.45rem; }
+      .address-block { padding: 48px 32px; }
+      .address-main { font-size: 1.7rem; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .page-hero h1 { font-size: 2rem; }
+      .contact-value { font-size: 1.3rem; }
+      .address-main { font-size: 1.5rem; }
+      .address-block { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body data-page="support">
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a href="index.html" class="logo">Ziro<span>.</span></a>
+      <nav class="nav-links">
+        <a href="index.html">Laptops</a>
+        <a href="ultrabooks.html">Ultrabooks</a>
+        <a href="gaming.html">Gaming</a>
+        <a href="support.html" class="active">Support</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16L21 21" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="Cart">
+          <svg viewBox="0 0 24 24"><path d="M3 3H5L7 15H19L21 6H6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.5" fill="currentColor" stroke="none"/><circle cx="17" cy="20" r="1.5" fill="currentColor" stroke="none"/></svg>
+          <span class="cart-badge">2</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <h1>We're here to <span class="accent">help</span></h1>
+        <p>Reach our support team anytime. Fast responses, real humans, and solutions that actually work.</p>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Phone -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M22 16.92V19.92C22 20.4704 21.5523 20.9182 21.0019 20.9683C20.6201 21.003 20.236 21.02 19.85 21.02C10.5799 21.02 3 13.4401 3 4.17C3 3.784 3.017 3.3999 3.0517 3.0181C3.1018 2.46771 3.54961 2.02 4.1 2.02H7.1C7.65228 2.02 8.1 2.46772 8.1 3.02C8.1 3.82 8.22 4.6 8.44 5.34C8.56 5.74 8.46 6.18 8.16 6.46L6.71 7.91C8.14 10.97 10.63 13.46 13.69 14.89L15.14 13.44C15.42 13.14 15.86 13.04 16.26 13.16C17 13.38 17.78 13.5 18.58 13.5C19.1323 13.5 19.58 13.9477 19.58 14.5V17.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Call us</h3>
+            <div class="contact-value">
+              <a href="tel:+18005558642">+1 (800) 555-8642</a>
+            </div>
+            <p class="contact-sub">Mon–Fri 8am–8pm PT<br>Sat–Sun 9am–5pm PT</p>
+          </div>
+
+          <!-- Email -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"/>
+                <path d="M22 6L12 13L2 6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Email us</h3>
+            <div class="contact-value">
+              <a href="mailto:support@zirodevices.com">support@zirodevices.com</a>
+            </div>
+            <p class="contact-sub">We reply within 4 hours<br>on business days</p>
+          </div>
+
+          <!-- Chat / Live -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Live chat</h3>
+            <div class="contact-value">Start chat</div>
+            <p class="contact-sub">Available 24/7<br>Average wait under 2 min</p>
+          </div>
+        </div>
+
+        <!-- Address block - large elegant style -->
+        <div class="address-block">
+          <h2>Headquarters</h2>
+          <div class="address-main">
+            850 Market Street<br>
+            Suite 400
+          </div>
+          <p class="address-detail">
+            San Francisco, CA 94102<br>
+            United States
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="hours-section">
+      <div class="container">
+        <div class="hours-grid">
+          <div class="hours-card">
+            <h4>Phone Support</h4>
+            <p>Monday – Friday<br>8:00 AM – 8:00 PM PT<br><br>Saturday – Sunday<br>9:00 AM – 5:00 PM PT</p>
+          </div>
+          <div class="hours-card">
+            <h4>Email & Chat</h4>
+            <p>24 hours a day<br>7 days a week<br><br>Typical response<br>under 4 hours</p>
+          </div>
+          <div class="hours-card">
+            <h4>Warranty Claims</h4>
+            <p>2-year limited warranty<br>on all laptops<br><br>Express replacement<br>available in most areas</p>
+          </div>
+          <div class="hours-card">
+            <h4>Returns</h4>
+            <p>30-day free returns<br>from delivery date<br><br>Full refund to original<br>payment method</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">Ziro<span>.</span></a>
+          <p>Premium laptops designed in California. Est. 2018.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Shop</h5>
+          <a href="index.html">All laptops</a>
+          <a href="ultrabooks.html">Ultrabooks</a>
+          <a href="gaming.html">Gaming</a>
+        </div>
+        <div class="footer-col">
+          <h5>Support</h5>
+          <a href="support.html">Contact us</a>
+          <a href="support.html">Order status</a>
+          <a href="support.html">Returns</a>
+          <a href="support.html">Warranty</a>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="#">About</a>
+          <a href="#">Sustainability</a>
+          <a href="#">Press</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Ziro Devices Inc. All rights reserved.</span>
+        <span>Privacy · Terms · Cookies · <a href="admin.html" style="color:inherit;opacity:0.6">Admin</a></span>
+      </div>
+    </div>
+  </footer>
+<script src="content.js"></script>
+<script src="admin-access.js"></script>
+<script src="apply-content.js"></script>
+</body>
+</html>

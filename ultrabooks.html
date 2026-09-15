@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultrabooks | Ziro Devices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #ffffff; font-family: 'Inter', sans-serif; color: #1e293b;
+      line-height: 1.5; -webkit-font-smoothing: antialiased;
+    }
+    :root {
+      --light-blue: #e8f0fe; --blue-gray-50: #f8fafc; --blue-gray-100: #f1f5f9;
+      --blue-gray-200: #e2e8f0; --blue-gray-300: #cbd5e1; --blue-gray-400: #94a3b8;
+      --dark-blue: #0b1e33; --accent-blue: #2563eb; --accent-soft: #dbeafe; --white: #ffffff;
+      --shadow-sm: 0 8px 20px -6px rgba(0, 20, 40, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 20px 35px -12px rgba(0, 35, 70, 0.12), 0 8px 18px -6px rgba(0, 0, 0, 0.05);
+    }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+    .nav-bar { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo {
+      font-family: 'Manrope', sans-serif; font-size: 1.8rem; font-weight: 700;
+      letter-spacing: -0.02em; color: var(--dark-blue); text-decoration: none;
+    }
+    .logo span { color: var(--accent-blue); font-weight: 600; }
+    .nav-links { display: flex; gap: 2.5rem; font-weight: 500; font-size: 0.95rem; color: #1e2e47; }
+    .nav-links a { text-decoration: none; color: inherit; transition: color 0.2s ease; letter-spacing: -0.01em; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-blue); }
+    .header-actions { display: flex; gap: 0.75rem; align-items: center; }
+    .icon-btn {
+      background: transparent; border: none; padding: 8px; border-radius: 40px; cursor: pointer;
+      color: var(--dark-blue); transition: background 0.2s; display: flex; align-items: center; justify-content: center;
+    }
+    .icon-btn:hover { background: var(--blue-gray-100); }
+    .cart-badge {
+      background: var(--accent-blue); color: white; font-size: 0.7rem; font-weight: 600;
+      width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; margin-left: -8px; margin-top: -12px; position: relative; top: -4px;
+    }
+    .icon-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 1.8; fill: none; }
+
+    .page-hero {
+      padding: 72px 0 48px; background: linear-gradient(160deg, #ffffff 0%, #f4f8ff 100%);
+      border-bottom: 1px solid var(--blue-gray-200);
+    }
+    .page-hero-content { max-width: 720px; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #64748b; margin-bottom: 20px; }
+    .breadcrumb a { color: #64748b; text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--accent-blue); }
+    .breadcrumb span { color: var(--blue-gray-400); }
+    .page-hero h1 {
+      font-family: 'Manrope', sans-serif; font-size: 3.2rem; font-weight: 700;
+      letter-spacing: -0.03em; color: var(--dark-blue); margin-bottom: 16px; line-height: 1.15;
+    }
+    .page-hero h1 .accent { color: var(--accent-blue); }
+    .page-hero p { font-size: 1.15rem; color: #475569; max-width: 560px; line-height: 1.6; }
+
+    .filter-bar {
+      padding: 28px 0; border-bottom: 1px solid var(--blue-gray-200);
+      position: sticky; top: 72px; z-index: 40; backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.92);
+    }
+    .filter-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .filter-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+    .chip {
+      padding: 8px 18px; border-radius: 40px; font-size: 0.9rem; font-weight: 500;
+      border: 1px solid var(--blue-gray-300); background: white; color: #334155;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .chip:hover, .chip.active { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+    .sort-select {
+      padding: 8px 16px; border-radius: 12px; border: 1px solid var(--blue-gray-300);
+      background: white; font-size: 0.9rem; color: #334155; font-family: inherit; cursor: pointer;
+    }
+
+    .products-section { padding: 56px 0 80px; background: var(--white); }
+    .product-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 28px;
+    }
+    .product-card {
+      background: var(--white); border-radius: 24px; padding: 20px 18px 24px;
+      border: 1px solid rgba(148, 163, 184, 0.2); box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1); display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+    }
+    .product-card:hover {
+      transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: rgba(37, 99, 235, 0.28);
+    }
+    .product-image {
+      width: 100%; aspect-ratio: 1.25 / 1;
+      background: linear-gradient(145deg, #f0f7ff 0%, #e8f0fe 50%, #ffffff 100%);
+      border-radius: 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(148, 163, 184, 0.12); position: relative; overflow: hidden;
+    }
+    .laptop-mock {
+      width: 78%; display: flex; flex-direction: column; align-items: center;
+      position: relative; transition: transform 0.35s ease;
+    }
+    .product-card:hover .laptop-mock { transform: scale(1.04) translateY(-4px); }
+    .laptop-lid {
+      width: 100%; aspect-ratio: 16 / 10;
+      background: linear-gradient(160deg, #1a2f4a 0%, #0b1e33 100%);
+      border-radius: 10px 10px 3px 3px; border: 2.5px solid #2a3f5c;
+      box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.35);
+      display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+    }
+    .laptop-lid::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 25%, rgba(37, 99, 235, 0.25), transparent 55%);
+    }
+    .laptop-screen-content {
+      position: relative; z-index: 1; text-align: center; color: rgba(255, 255, 255, 0.85);
+    }
+    .laptop-screen-content .brand {
+      font-family: 'Manrope', sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 2px; opacity: 0.9;
+    }
+    .laptop-screen-content .model { font-size: 0.7rem; opacity: 0.55; margin-top: 4px; letter-spacing: 0.5px; }
+    .laptop-base {
+      width: 108%; height: 12px;
+      background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 100%);
+      border-radius: 0 0 10px 10px; margin-top: 3px;
+      box-shadow: 0 8px 14px -6px rgba(0, 0, 0, 0.2);
+      border: 1px solid #94a3b8; border-top: 2px solid #f1f5f9; position: relative;
+    }
+    .laptop-base::after {
+      content: ''; position: absolute; top: 3px; left: 50%; transform: translateX(-50%);
+      width: 28%; height: 3px; background: #94a3b8; border-radius: 2px;
+    }
+    .laptop-mock.silver .laptop-lid { background: linear-gradient(160deg, #3d4f66 0%, #1e2e47 100%); border-color: #4a5d78; }
+    .laptop-mock.space-gray .laptop-lid { background: linear-gradient(160deg, #2d3748 0%, #1a202c 100%); border-color: #4a5568; }
+    .laptop-mock.midnight .laptop-lid { background: linear-gradient(160deg, #0f172a 0%, #020617 100%); border-color: #1e293b; }
+    .laptop-mock.gold .laptop-lid { background: linear-gradient(160deg, #44403c 0%, #292524 100%); border-color: #57534e; }
+
+    .product-tag {
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+      color: var(--accent-blue); background: var(--accent-soft); padding: 4px 11px;
+      border-radius: 40px; display: inline-block; margin-bottom: 10px;
+    }
+    .product-tag.bestseller { background: #fef3c7; color: #b45309; }
+    .product-tag.new { background: #dcfce7; color: #15803d; }
+    .product-card h3 {
+      font-family: 'Manrope', sans-serif; font-size: 1.25rem; font-weight: 700;
+      letter-spacing: -0.02em; color: var(--dark-blue); margin-bottom: 4px;
+    }
+    .product-spec { font-size: 0.88rem; color: #64748b; margin-bottom: 6px; font-weight: 400; }
+    .product-desc { font-size: 0.85rem; color: #94a3b8; margin-bottom: 16px; line-height: 1.45; }
+    .price-row {
+      display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: auto; gap: 10px;
+    }
+    .price {
+      font-weight: 700; font-size: 1.25rem; color: var(--dark-blue);
+      font-family: 'Manrope', sans-serif; letter-spacing: -0.02em;
+    }
+    .price small { font-size: 0.78rem; font-weight: 400; color: #64748b; margin-left: 3px; }
+    .btn-icon {
+      background: var(--blue-gray-100); border: none; border-radius: 40px; padding: 9px 16px;
+      font-weight: 600; font-size: 0.82rem; color: var(--dark-blue); cursor: pointer;
+      transition: all 0.2s ease; border: 1px solid transparent; letter-spacing: -0.01em; white-space: nowrap;
+    }
+    .product-card:hover .btn-icon {
+      background: var(--accent-blue); color: white; border-color: var(--accent-blue);
+      box-shadow: 0 8px 16px -6px rgba(37, 99, 235, 0.3);
+    }
+
+    .feature-strip {
+      padding: 48px 0; background: var(--blue-gray-50);
+      border-top: 1px solid var(--blue-gray-200); border-bottom: 1px solid var(--blue-gray-200);
+    }
+    .feature-strip-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;
+    }
+    .feature-item { display: flex; align-items: flex-start; gap: 14px; }
+    .feature-icon {
+      width: 42px; height: 42px; min-width: 42px; background: var(--light-blue); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; color: var(--accent-blue);
+      border: 1px solid rgba(37, 99, 235, 0.12);
+    }
+    .feature-icon svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+    .feature-item h4 {
+      font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 700; color: var(--dark-blue); margin-bottom: 4px;
+    }
+    .feature-item p { font-size: 0.88rem; color: #64748b; line-height: 1.5; }
+
+    .cta-banner { padding: 60px 0 80px; background: var(--white); }
+    .cta-card {
+      background: var(--dark-blue); border-radius: 36px; padding: 56px 44px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 32px;
+      box-shadow: 0 30px 45px -20px rgba(11, 30, 51, 0.3); position: relative; overflow: hidden;
+    }
+    .cta-card::after {
+      content: ''; position: absolute; top: -30%; right: -8%; width: 280px; height: 280px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.22), transparent 70%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .cta-text h3 {
+      font-family: 'Manrope', sans-serif; font-size: 1.9rem; font-weight: 700; color: white;
+      letter-spacing: -0.02em; margin-bottom: 8px;
+    }
+    .cta-text p { color: #b9c7da; font-size: 1.05rem; max-width: 460px; }
+    .btn-light {
+      background: white; color: var(--dark-blue); padding: 15px 34px; border-radius: 60px;
+      font-weight: 600; text-decoration: none; font-size: 1rem; transition: all 0.25s ease;
+      border: 1px solid white; letter-spacing: -0.01em;
+      box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2); white-space: nowrap; position: relative; z-index: 1;
+    }
+    .btn-light:hover {
+      background: #eef4ff; transform: translateY(-2px);
+      box-shadow: 0 18px 28px -12px rgba(0, 0, 0, 0.3);
+    }
+
+    .site-footer {
+      padding: 64px 0 32px; background: var(--blue-gray-50); border-top: 1px solid var(--blue-gray-200);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 48px; margin-bottom: 48px;
+    }
+    .footer-brand .logo { font-size: 1.6rem; margin-bottom: 16px; display: inline-block; }
+    .footer-brand p { color: #475569; font-size: 0.9rem; max-width: 240px; line-height: 1.6; }
+    .footer-col h5 {
+      font-family: 'Manrope', sans-serif; font-size: 0.95rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.04em; color: var(--dark-blue); margin-bottom: 20px;
+    }
+    .footer-col a {
+      display: block; text-decoration: none; color: #475569; font-size: 0.9rem; margin-bottom: 12px; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--accent-blue); }
+    .footer-bottom {
+      border-top: 1px solid var(--blue-gray-200); padding-top: 32px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+      color: #64748b; font-size: 0.85rem;
+    }
+
+    @media (max-width: 1024px) { .page-hero h1 { font-size: 2.6rem; } .nav-links { gap: 1.6rem; } }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .page-hero { padding: 48px 0 36px; }
+      .page-hero h1 { font-size: 2.2rem; }
+      .page-hero p { font-size: 1.05rem; }
+      .cta-card { padding: 40px 28px; }
+      .cta-text h3 { font-size: 1.55rem; }
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .page-hero h1 { font-size: 1.9rem; }
+      .product-grid { grid-template-columns: 1fr; }
+      .cta-card { padding: 32px 22px; }
+      .cta-text h3 { font-size: 1.35rem; }
+      .btn-light { padding: 13px 26px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body data-page="ultrabooks">
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a href="index.html" class="logo">Ziro<span>.</span></a>
+      <nav class="nav-links">
+        <a href="index.html">Laptops</a>
+        <a href="ultrabooks.html" class="active">Ultrabooks</a>
+        <a href="gaming.html">Gaming</a>
+        <a href="support.html">Support</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16L21 21" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="Cart">
+          <svg viewBox="0 0 24 24"><path d="M3 3H5L7 15H19L21 6H6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.5" fill="currentColor" stroke="none"/><circle cx="17" cy="20" r="1.5" fill="currentColor" stroke="none"/></svg>
+          <span class="cart-badge">2</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero-content">
+          <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <a href="index.html">Laptops</a>
+            <span>/</span>
+            <span style="color: var(--dark-blue); font-weight: 500;">Ultrabooks</span>
+          </div>
+          <h1>Ultra-thin. Ultra-powerful. <span class="accent">Ultrabooks.</span></h1>
+          <p>Feather-light chassis, all-day battery, and silent performance. Designed for creators and professionals who move fast.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="filter-bar">
+      <div class="container filter-row">
+        <div class="filter-chips">
+          <button class="chip active">All</button>
+          <button class="chip">13-inch</button>
+          <button class="chip">14-inch</button>
+          <button class="chip">15-inch</button>
+          <button class="chip">Under $1,500</button>
+          <button class="chip">M3 Series</button>
+        </div>
+        <select class="sort-select">
+          <option>Sort: Featured</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Newest</option>
+        </select>
+      </div>
+    </div>
+
+    <section class="products-section">
+      <div class="container">
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-image">
+              <div class="laptop-mock silver">
+                <div class="laptop-lid"><div class="laptop-screen-content"><div class="brand">Ziro</div><div class="model">Air 13</div></div></div>
+                <div class="laptop-base"></div>
+              </div>
+            </div>
+            <span class="product-tag bestseller">Bestseller</span>
+            <h3>Ziro Air 13</h3>
+            <div class="product-spec">M3 · 16GB · 512GB SSD</div>
+            <div class="product-desc">1.2 kg · 18-hour battery · Liquid Retina</div>
+            <div class="price-row">
+              <div class="price">$1,299 <small>USD</small></div>
+              <button class="btn-icon">Details</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="laptop-mock space-gray">
+                <div class="laptop-lid"><div class="laptop-screen-content"><div class="brand">Ziro</div><div class="model">Air 14</div></div></div>
+                <div class="laptop-base"></div>
+              </div>
+            </div>
+            <span class="product-tag new">New</span>
+            <h3>Ziro Air 14</h3>
+            <div class="product-spec">M3 Pro · 18GB · 1TB SSD</div>
+            <div class="product-desc">1.4 kg · 20-hour battery · Mini-LED</div>
+            <div class="price-row">
+              <div class="price">$1,799 <small>USD</small></div>
+              <button class="btn-icon">Details</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="laptop-mock midnight">
+                <div class="laptop-lid"><div class="laptop-screen-content"><div class="brand">Ziro</div><div class="model">Book 13</div></div></div>
+                <div class="laptop-base"></div>
+              </div>
+            </div>
+            <span class="product-tag">Ultra</span>
+            <h3>Ziro Book 13</h3>
+            <div class="product-spec">Intel Core Ultra 7 · 16GB · 512GB</div>
+            <div class="product-desc">1.1 kg · 16-hour battery · OLED</div>
+            <div class="price-row">
+              <div class="price">$1,149 <small>USD</small></div>
+              <button class="btn-icon">Details</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="laptop-mock gold">
+                <div class="laptop-lid"><div class="laptop-screen-content"><div class="brand">Ziro</div><div class="model">Slim 15</div></div></div>
+                <div class="laptop-base"></div>
+              </div>
+            </div>
+            <span class="product-tag">Popular</span>
+            <h3>Ziro Slim 15</h3>
+            <div class="product-spec">Ryzen AI 9 · 32GB · 1TB SSD</div>
+            <div class="product-desc">1.5 kg · 19-hour battery · 3K OLED</div>
+            <div class="price-row">
+              <div class="price">$1,599 <small>USD</small></div>
+              <button class="btn-icon">Details</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="laptop-mock silver">
+                <div class="laptop-lid"><div class="laptop-screen-content"><div class="brand">Ziro</div><div class="model">Air SE</div></div></div>
+                <div class="laptop-base"></div>
+              </div>
+            </div>
+            <span class="product-tag">Value</span>
+            <h3>Ziro Air SE</h3>
+            <div class="product-spec">M2 · 8GB · 256GB SSD</div>
+            <div class="product-desc">1.25 kg · 15-hour battery · Retina</div>
+            <div class="price-row">
+              <div class="price">$999 <small>USD</small></div>
+              <button class="btn-icon">Details</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="laptop-mock space-gray">
+                <div class="laptop-lid"><div class="laptop-screen-content"><div class="brand">Ziro</div><div class="model">Pro Air 14</div></div></div>
+                <div class="laptop-base"></div>
+              </div>
+            </div>
+            <span class="product-tag new">New</span>
+            <h3>Ziro Pro Air 14</h3>
+            <div class="product-spec">M3 Max · 36GB · 1TB SSD</div>
+            <div class="product-desc">1.55 kg · 22-hour battery · XDR</div>
+            <div class="price-row">
+              <div class="price">$2,499 <small>USD</small></div>
+              <button class="btn-icon">Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-strip">
+      <div class="container">
+        <div class="feature-strip-grid">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h4>Ultra-light chassis</h4>
+              <p>CNC-milled aluminum under 1.5 kg on most models.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6V12L16 14" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h4>All-day battery</h4>
+              <p>Up to 22 hours real-world use with fast charging.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 20L20 4M4 4L20 20" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h4>Whisper quiet</h4>
+              <p>Vapor chamber cooling stays silent under load.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M8 10H16" stroke-linecap="round"/><path d="M8 14H13" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h4>Stunning displays</h4>
+              <p>Liquid Retina, OLED & Mini-LED options available.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-banner">
+      <div class="container">
+        <div class="cta-card">
+          <div class="cta-text">
+            <h3>Find your perfect Ultrabook</h3>
+            <p>Compare models side-by-side or configure memory, storage & color.</p>
+          </div>
+          <a href="index.html" class="btn-light">Compare models →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">Ziro<span>.</span></a>
+          <p>Premium laptops designed in California. Est. 2018.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Shop</h5>
+          <a href="index.html">All laptops</a>
+          <a href="ultrabooks.html">Ultrabooks</a>
+          <a href="gaming.html">Gaming</a>
+        </div>
+        <div class="footer-col">
+          <h5>Support</h5>
+          <a href="support.html">Contact us</a>
+          <a href="support.html">Order status</a>
+          <a href="support.html">Returns</a>
+          <a href="support.html">Warranty</a>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="#">About</a>
+          <a href="#">Sustainability</a>
+          <a href="#">Press</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Ziro Devices Inc. All rights reserved.</span>
+        <span>Privacy · Terms · Cookies · <a href="admin.html" style="color:inherit;opacity:0.6">Admin</a></span>
+      </div>
+    </div>
+  </footer>
+<script src="content.js"></script>
+<script src="admin-access.js"></script>
+<script src="apply-content.js"></script>
+</body>
+</html>
