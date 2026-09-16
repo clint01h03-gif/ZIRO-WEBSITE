@@ -1,0 +1,73 @@
+=====================================================
+Ziro Devices — Firebase Setup (IMPORTANT)
+=====================================================
+
+Your site now uses:
+  • Firestore  → all text, prices, product data (permanent)
+  • Storage    → product images (permanent, all devices)
+
+-----------------------------------------------------
+1) ENABLE SERVICES (Firebase Console)
+-----------------------------------------------------
+Open: https://console.firebase.google.com/project/ziro-web-90d2d
+
+A) Build → Firestore Database → Create database
+   - Start in TEST MODE (or production with rules below)
+   - Choose any location
+
+B) Build → Storage → Get started
+   - Start in TEST MODE first
+   - Same location preferred
+
+-----------------------------------------------------
+2) FIRESTORE RULES (copy-paste)
+-----------------------------------------------------
+Firestore → Rules → Publish:
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /cms/{doc} {
+      allow read: if true;
+      allow write: if true;   // demo only — lock later with Auth
+    }
+  }
+}
+
+-----------------------------------------------------
+3) STORAGE RULES (copy-paste)
+-----------------------------------------------------
+Storage → Rules → Publish:
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /product-images/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.resource.size < 5 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
+
+-----------------------------------------------------
+4) HOW IT WORKS NOW
+-----------------------------------------------------
+• Admin Save  → writes to Firestore (all devices see it)
+• Image Upload → uploads to Firebase Storage → public URL saved
+• Any phone/PC opening the site loads same data from Firebase
+
+-----------------------------------------------------
+5) SECURITY NOTE
+-----------------------------------------------------
+API key in frontend is normal for Firebase.
+But "allow write: if true" is OPEN — anyone can edit.
+Later: add Firebase Auth and restrict write to your account only.
+
+-----------------------------------------------------
+6) TEST
+-----------------------------------------------------
+1. Open admin.html → password: zatheer
+2. Change a price → Save All Changes
+3. Open website on another device/browser → same price shows
+4. Upload a product image → should show everywhere
